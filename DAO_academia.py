@@ -17,7 +17,7 @@ print("#SISTEMA DE RESERVA#")
 socio = 7
 
 conn = sqlite3.connect('modelo_academia.db')
-
+#LINHA DE COMENTARIO PARA TESTAR COMMIT
 c = conn.cursor()
 
 def verificaReservas(socio):
