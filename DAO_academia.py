@@ -17,7 +17,7 @@ print("#SISTEMA DE RESERVA#")
 socio = 7
 
 conn = sqlite3.connect('modelo_academia.db')
-#TESTANDO PULL
+
 c = conn.cursor()
 
 def verificaReservas(socio):
@@ -31,20 +31,30 @@ def verificaReservas(socio):
 		print(results)
 	conn.commit()
 
-def reservaSala(socio,sala):
-	data = getData()
-	d = (socio,sala,data,hora,)
-	verificaDisponibilidade()
-	try:
-		c.execute('INSERT INTO socio_reserva_sala_squash VALUES	(?,?,?,?)',d)
-	except:
-		print("Nao foi possivel fazer esta reserva")
-	else:
-		print("Reserva efetuada!")
+def reservaSala(socio = 1,sala = 1):
+	q = 'S'
+	while q == 'S' or q == 's':
+		data = getData()
+		d = (socio,sala,data,)
+		verificaDisponibilidade()
+		try:
+			c.execute('INSERT INTO socio_reserva_sala_squash VALUES	(?,?,?,?)',d)
+		except:
+			print("Nao foi possivel fazer esta reserva")
+		else:
+			print("Reserva efetuada!")
+		q = input("Quer fazer mais uma reserva: (S/N)")
 	conn.commit()
 
 def verificaDisponibilidade():
 	data = getData()
+	d = (data,)
+	query = c.execute('SELECT * FROM socio_reserva_sala_squash where data = ?',d)
+	results = c.fetchone()
+	if results:
+		return True
+	else:
+		return False
 
 def getData():
 	dia = int(input("Digite o dia da reserva:"))
@@ -53,7 +63,22 @@ def getData():
 	hora = int(input("Digite o horario da reserva:"))
 	data = datetime(ano,mes,dia,hora,0)
 	return data
-	
 
-print(getData())
+def seleciona_funcao(op):
+    switcher = {
+        1: reservaSala(),
+        2: verificaReservas(),
+        3: verificaDisponibilidade(),
+    }
+
+q = 'S'
+while q == 'S' or q == 's':
+	print("O que deseja fazer?")
+	print("1 - Fazer uma reserva")
+	print("2 - Verificar suas reservas")
+	print("3 - Verificar se um horário esta disponivel")
+	op = input()
+	seleciona_funcao(op)
+	q = input("Deseja fazer mais alguma operação? (S/N)")
+
 conn.close()
