@@ -32,6 +32,7 @@ def verificaReservas(socio):
 	conn.commit()
 
 def reservaSala(socio = 1,sala = 1):
+
 	q = 'S'
 	while q == 'S' or q == 's':
 		data = getData()
@@ -60,16 +61,28 @@ def getData():
 	dia = int(input("Digite o dia da reserva:"))
 	mes = int(input("Digite o mes da reserva:"))
 	ano = int(input("Digite o ano da reserva:"))
-	hora = int(input("Digite o horario da reserva:"))
+	hora = int(input("Digite a hora da reserva:"))
 	data = datetime(ano,mes,dia,hora,0)
 	return data
 
-def seleciona_funcao(op):
+def selecionaFuncao(op):
+	""" 
     switcher = {
         1: reservaSala(),
         2: verificaReservas(),
         3: verificaDisponibilidade(),
-    }
+    }   
+	"""
+	op = int(op)
+	if op == 1:
+		reservaSala()
+	elif op == 2:
+		verificaReservas()
+	elif op == 3:
+		verificaDisponibilidade()
+	else:
+		print("Você digitou um valor inválido, tente novamente") 
+
 
 q = 'S'
 while q == 'S' or q == 's':
@@ -78,7 +91,7 @@ while q == 'S' or q == 's':
 	print("2 - Verificar suas reservas")
 	print("3 - Verificar se um horário esta disponivel")
 	op = input()
-	seleciona_funcao(op)
+	selecionaFuncao(op)
 	q = input("Deseja fazer mais alguma operação? (S/N)")
 
 conn.close()
