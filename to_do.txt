@@ -1,0 +1,7 @@
+TO_DOs:
+
+# Metodo reservaSala() pergunta qual socio e qual sala
+
+# Implementar função cadastrarSocio(dados_do_socio)
+
+# Metodo verificaReservas() pergunta qual o socio dentro da funcao e nao recebe como parametro
