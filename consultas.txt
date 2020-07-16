@@ -1,5 +1,0 @@
-SELECT  
-a.idSocio, a.nome, c.estado 
-from socio_reserva_sala_squash as b 
-inner join socio as a on a.idSocio = b.Socio_idSocio
-inner join sala_squash as c on c.idSala_Squash = b.Sala_Squash_idSala_Squash
