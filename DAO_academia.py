@@ -31,7 +31,7 @@ def verificaReservas(socio):
 		print(results)
 	conn.commit()
 
-def reservaSala(socio = 1,sala = 1):
+def reservaSala():
 
 	q = 'S'
 	while q == 'S' or q == 's':
