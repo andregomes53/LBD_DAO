@@ -30,7 +30,7 @@ def insereSalasSquash():
         
     
 
-insereSalasSquash()
+#insereSalasSquash()
 
 conn.close()
 
